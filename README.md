@@ -1,3 +1,3 @@
 # wasty-steam
 
-Semi-private repo. So please ignore :)
+Semi-private repo

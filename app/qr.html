@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR - Wasty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="qr-scanner"></div>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script>
+        function domReady(fn) {
+            if (
+                document.readyState === "complete" ||
+                document.readyState === "interactive"
+            ) {
+                setTimeout(fn, 1000);
+            } else {
+                document.addEventListener("DOMContentLoaded", fn);
+            }
+        }
+         
+        domReady(function () {
+            const html5QrCode = new Html5Qrcode("qr-scanner");
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                html5QrCode.stop()
+                window.location.href = "/?qr=success"
+            };
+
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+            html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+        });
+    </script>
+</body>
+</html>

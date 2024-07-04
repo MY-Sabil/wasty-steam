@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="main">
+            <div class="navbar">
+                <img src="/img/logo.png" class="nav-logo">
+                <div class="profile">
+                    <p>Log out</p>
+                    <img src="/img/user.jpeg" class="user-pfp">
+                </div>
+            </div>
+            <div class="points">
+                <div class="number">
+                    <img src="/img/points.png" alt="">
+                    <p id="points">1260</p>
+                </div>
+                <div class="redeem-btn">Redeem</div>
+            </div>
+            <div class="buttons">
+                <a href="/qr" class="button">
+                    <img src="img/qr-icon.png" alt="">
+                    <p>Scan QR</p>
+                </a>
+                <a href="#" class="button">
+                    <img src="img/location-icon.png" alt="">
+                    <p>Find Binbin</p>
+                </a>
+            </div>
+            <div class="shop">
+                <p class="shop-title">Wasty Shop</p>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <img src="img/rapid-pass.png" class="shop-img">
+                        <div>
+                            <p class="item-name">Rapid Pass 100tk Recharge</p>
+                            <p class="price">
+                                <img src="/img/points.png" alt="">
+                                1000
+                            </p>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <img src="img/foodpanda.png" class="shop-img">
+                        <div>
+                            <p class="item-name">FoodPanda 50tk Voucher</p>
+                            <p class="price">
+                                <img src="/img/points.png" alt="">
+                                450
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <script>
+        var localPoints = localStorage.getItem('points')
+        if (localPoints) {
+            document.getElementById("points").innerText = localPoints
+        }
+        const points = document.getElementById("points").innerText;
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const qr = urlParams.get('qr')
+        
+        if (qr == "success") {
+            var value = parseInt(points, 10)
+            value = isNaN(value) ? 0 : value
+            value += 50
+            document.getElementById("points").innerText = value
+            localStorage.setItem('points', value)
+            alert("50 points added. Thanks for saving the environment!")
+        }
+    </script>
+</body>
+</html>
